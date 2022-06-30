@@ -1,0 +1,14 @@
+# swap files
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+sites/.build
+data/*
+apps/*
+!apps/README.md
+*.build
+*/assets/*
+*/private/*
+*/public/*
+*logs/*

@@ -1,0 +1,8 @@
+docker run -d -p 8000:80 --name php --network my-bridge-network -v "C:/Users/Prakash/Desktop/phpimage":/var/www/html/ --link mysql php:7.2-apache
+
+docker run --name mysql --network my-bridge-network -v "C:/Users/Prakash/Desktop/php-dockerapp/src/src/mysqlconfig":/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-sql-database --link php -d mysql:5.7
+
+
+docker run --name db -v "C:/Users/Prakash/Desktop/php-dockerapp/src/src/mysqlconfig":/etc/mysql/conf.d -e MYSQL_USER=tests -e MYSQL_PASSWORD=tests -e MYSQL_DATABASE=register -e MYSQL_ROOT_PASSWORD=example -p 3306:3306 -d mysql:5.7
+
+docker run -d --name phpcore -v "C:/Users/Prakash/Desktop/phpimage":/var/www/html/ --link db -p 8000:80  -e MYSQL_ROOT_PASSWORD=tests -e MYSQL_USERNAME=tests -e MYSQL_PASSWORD=tests -e MYSQL_DATABASE=register -e MYSQL_HOST=db  php:7.2-apache

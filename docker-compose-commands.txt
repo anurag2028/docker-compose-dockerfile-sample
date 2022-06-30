@@ -1,0 +1,42 @@
+docker id - anuragshar
+docker pass - anurag2559
+
+
+
+* Install Docker (Ubuntu)
+ $ sudo apt update
+ $sudo apt install -y docker.io
+
+* Install Docker Compose (Ubuntu)
+ $ sudo apt Install -y docker-compose
+
+
+
+
+
+Syntax : docker-compose -f <Composefile> <Options> <ServiceName>
+*Create and start containers (defaults to interactive mode)
+ $ docker-compose up
+
+* create and start containers on detach mode
+ $ docker compose up -d
+
+* Create and start specific  services & its containers 
+ $ docker-compose up -d <service>
+
+* list Containers
+ $ docker-compose ps <service>
+
+* Stop and Remove Conatiners
+ $ docker-compose down <service>
+
+* View output from containers
+ $ docker-compose logs -f <service>
+
+
+* connecting local-volume 
+  $docker run --name php-app -v C:/Users/Prakash/Desktop/php-dockerapp/src:/var/www/html/ -p 8000:80 php:7.0-apache
+
+* php-apache and sql server connection
+  https://github.com/truthseekers/php-docker-simple/blob/master/src/index.php
+  -https://www.section.io/engineering-education/dockerized-php-apache-and-mysql-container-development-environment/

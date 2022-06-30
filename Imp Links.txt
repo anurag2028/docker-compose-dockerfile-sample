@@ -1,0 +1,9 @@
+docker compose samples with files in github
+
+https://github.com/docker/awesome-compose
+
+docker file examples
+
+https://github.com/komljen/dockerfile-examples
+
+https://adamtheautomator.com/docker-build-tag/

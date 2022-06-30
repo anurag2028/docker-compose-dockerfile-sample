@@ -1,0 +1,22 @@
+################################################################
+# Enable API/Dashboard
+################################################################
+[api]
+################################################################
+# Docker configuration backend
+################################################################
+[docker]
+domain = "docker.local"
+watch = true
+endpoint = "npipe:////./pipe/docker_engine"
+
+# Use Swarm Mode services as data provider
+#
+# Optional
+# Default: false
+#
+#swarmmode = true
+#
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"

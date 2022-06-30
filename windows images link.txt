@@ -1,0 +1,8 @@
+https://hub.docker.com/_/microsoft-dotnet
+related images to .net for windows container
+
+https://hub.docker.com/_/microsoft-dotnet-sdk
+related images to run the .net aplication in docker
+
+https://hub.docker.com/_/microsoft-mssql-server
+related images to mysql server for windows container

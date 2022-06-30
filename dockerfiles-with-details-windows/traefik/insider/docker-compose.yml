@@ -1,0 +1,40 @@
+version: '2.4'
+services:
+  traefik:
+    image: stefanscherer/traefik-windows:v1.7.12-insider-10.0.18334.1
+    ports:
+      - "8080:8080" # Please read: https://docs.traefik.io/configuration/api/#security
+      - "443:443"
+      - "80:80"
+    volumes:
+      - .:C:/etc/traefik
+      - type: npipe
+        source: \\.\pipe\docker_engine
+        target: \\.\pipe\docker_engine
+    user: ContainerAdministrator
+
+
+  whoami1:
+    image: stefanscherer/whoami:insider-10.0.18334.1
+    labels:
+      - "traefik.backend=whoami"
+      - "traefik.frontend.entryPoints=http"
+      - "traefik.frontend.rule=Host:whoami.docker.local"
+
+  whoami2:
+    image: stefanscherer/whoami:insider-10.0.18334.1
+    labels:
+      - "traefik.backend=whoami"
+      - "traefik.frontend.entryPoints=http"
+      - "traefik.frontend.rule=Host:whoami.docker.local"
+
+#  portainer:
+#    image: portainer/portainer
+#    labels:
+#      - "traefik.backend=portainer"
+#      - "traefik.frontend.rule=Host:portainer.docker.local"
+
+networks:
+  default:
+    external:
+      name: nat

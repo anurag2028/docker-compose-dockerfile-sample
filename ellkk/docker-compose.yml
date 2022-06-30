@@ -1,0 +1,47 @@
+services:
+  elasticsearch:
+    image: elasticsearch:7.16.1
+    container_name: es
+    environment:
+      discovery.type: single-node
+      ES_JAVA_OPTS: "-Xms256m -Xmx256m"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    networks:
+      - elastic
+  logstash:
+    image: logstash:7.16.1
+    container_name: log
+    environment:
+      discovery.seed_hosts: logstash
+      LS_JAVA_OPTS: "-Xms256m -Xmx256m"
+    volumes:
+      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - "9055:9055/udp"
+      - "9056:9056/udp"
+      - "5044:5044"
+      - "9600:9600"
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
+    command: logstash -f /usr/share/logstash/pipeline/logstash.conf
+  kibana:
+    image: kibana:7.16.1
+    container_name: kib
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
+networks:
+  elastic:
+    driver: bridge
